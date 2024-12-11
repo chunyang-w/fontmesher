@@ -1,0 +1,11 @@
+LICENCE
+README.md
+pyproject.toml
+fontmesher/__init__.py
+fontmesher/font_pen.py
+fontmesher/font_tools.py
+fontmesher/utils.py
+fontmesher.egg-info/PKG-INFO
+fontmesher.egg-info/SOURCES.txt
+fontmesher.egg-info/dependency_links.txt
+fontmesher.egg-info/top_level.txt
