@@ -1,5 +1,7 @@
 # FontMesher 🎨🖋️
 
+![image](https://github.com/chunyang-w/fontmesher/blob/main/asset/logo.png?raw=true)
+
 Welcome to **FontMesher**! This project lets you create beautiful meshes from your favorite fonts (Currently supported fonts are listed in `style` folder, other ttf font might work, but not guaranteed - issues and contribution welcome!).
 
 This package will use GMSH to generate a 2-D mesh with characters written on it.
