@@ -40,6 +40,7 @@ class FontPen(BasePen):
     """
     def __init__(self, geo, min_val=-1, max_val=1, glyph_size=1, lc=0.02):
         self.start_point = None
+        self.path_start_idx = 0
         self.points = []
         self.curves = []
         self.curve_loops = []
@@ -51,6 +52,13 @@ class FontPen(BasePen):
         self.lc = lc
 
         self.geo = geo
+
+    def _clear_all(self):
+        self.start_point = None
+        self.points = []
+        self.curves = []
+        self.curve_loops = []
+        self.p_start = None
 
     def _normalize_point(self, pt):
         """
@@ -99,12 +107,15 @@ class FontPen(BasePen):
 
     def _closePath(self):
         # check is path integrity - if not, close the path
-        if self.points[0] != self.points[-1]:
-            curve = self.geo.addLine(self.points[-1], self.p_start)
+        if self.points[self.path_start_idx] != self.points[-1]:
+            end_point = self.points[-1]
+            start_point = self.points[self.path_start_idx]
+            curve = self.geo.addLine(end_point, start_point)
             self.curves.append(curve)
         curve_loop = self.geo.addCurveLoop(self.curves)
         self.curve_loops.append(curve_loop)
         # gmsh.model.geo.addPlaneSurface([curve_loop])
+        self.path_start_idx = len(self.points)
 
     def _endPath(self):
         self.value.append(("endPath",))

@@ -5,6 +5,8 @@ from fontmesher.font_pen import FontPen
 from fontmesher import default_font
 from fontmesher.utils import get_font_boundaries
 
+from fontTools.pens.recordingPen import RecordingPen
+
 
 def make_string_mesh(
     string,
@@ -73,9 +75,13 @@ def make_string_mesh(
             glyph_size=glyph_size,
             lc=lc
         )
+        r_pen = RecordingPen()
         glyph = string[i]
         g = glyphSet[cmap[ord(glyph)]]
         g.draw(pen)
+        g.draw(r_pen)
+        print(r_pen.value)
+        # exit()
         curves = pen.curves
         object_curves.extend(curves)
         gmsh.model.geo.translate([(1, curv) for curv in curves], i*glyph_offset + pad_x_start, pad_y_start, 0)  # noqa
