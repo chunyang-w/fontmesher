@@ -89,7 +89,6 @@ def make_string_mesh3d(
     for elem in domain_surface_extruded:
         tag, id = elem
         if tag == 3:
-            # outter_vol_list.append(id)
             gmsh.model.geo.remove([(tag, id)])
         else:
             box = gmsh.model.get_bounding_box(2, id)
@@ -133,7 +132,6 @@ def make_string_mesh3d(
         for elem in surface_extruded:
             tag, id = elem
             if tag == 3:
-                # object_vol_list.append(id)
                 gmsh.model.geo.remove([(tag, id)])
             else:
                 surface_list.append(id)
@@ -143,31 +141,20 @@ def make_string_mesh3d(
         
         object_surface_loop_list.append(surface_loop_3d)
 
-
     outter_surface_list =  inflow_list + outflow_list + wall_list
     outter_surface_loop = gmsh.model.geo.addSurfaceLoop(outter_surface_list)
     print("outter_surface_loop", outter_surface_loop)
 
-
-
     domain_with_void = gmsh.model.geo.addVolume([outter_surface_loop] + object_surface_loop_list)
-    # domain_vol = gmsh.model.geo.addVolume([outter_surface_loop])
-    # object_vol = gmsh.model.geo.addVolume([object_surface_loop])
-
-    print("here")
-    
 
     gmsh.model.geo.addPhysicalGroup(2, wall_list, 1, name="wall")
     gmsh.model.geo.addPhysicalGroup(2, inflow_list, 2, name="inflow")
     gmsh.model.geo.addPhysicalGroup(2, outflow_list, 3, name="outflow")
     gmsh.model.geo.addPhysicalGroup(2, object_surface_list, 4, name="obj")
-    # gmsh.model.geo.addPhysicalGroup(3, [domain_vol], 7, name="outter_domain")
-    # gmsh.model.geo.addPhysicalGroup(3, [object_vol], 8, name="object")
     gmsh.model.geo.addPhysicalGroup(3, [domain_with_void], 9, name="domain_with_void")
 
 
     gmsh.model.geo.synchronize()
-    # gmsh.fltk.run()
 
     gmsh.model.mesh.generate(3)
     save_path = os.path.join(

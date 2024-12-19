@@ -84,6 +84,7 @@ def make_string_mesh(
         object_curves.extend(curves)
         gmsh.model.geo.translate([(1, curv) for curv in curves], i*glyph_offset + pad_x_start, pad_y_start, 0)  # noqa
         surface_loop = gmsh.model.geo.add_curve_loop(curves)
+        gmsh.model.geo.addPhysicalGroup(1, curves, i + int(1e10), name=f"curves_of_{glyph}")
         object_surface_loop.append(surface_loop)
 
     domain_surface_loop = gmsh.model.geo.add_curve_loop(domain_curves)
