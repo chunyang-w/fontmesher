@@ -12,13 +12,14 @@ def make_string_mesh(
     string,
     font=default_font,
     save_dir=".",
-    lc=0.02,
+    lc=0.1,
     glyph_size=0.5,
     pad_y_start=0.25,
     pad_y_end=0.25,
     pad_x_start=0.8,
     pad_x_end=0.8,
     glyph_offset=0.5,
+    extrude=False,
 ):
     """
     Generates a mesh for a given string using a specified font and saves it to a file.
@@ -75,13 +76,10 @@ def make_string_mesh(
             glyph_size=glyph_size,
             lc=lc
         )
-        r_pen = RecordingPen()
+        # r_pen = RecordingPen()
         glyph = string[i]
         g = glyphSet[cmap[ord(glyph)]]
         g.draw(pen)
-        g.draw(r_pen)
-        print(r_pen.value)
-        # exit()
         curves = pen.curves
         object_curves.extend(curves)
         gmsh.model.geo.translate([(1, curv) for curv in curves], i*glyph_offset + pad_x_start, pad_y_start, 0)  # noqa
@@ -99,7 +97,7 @@ def make_string_mesh(
     gmsh.model.geo.addPhysicalGroup(2, [whole_surface], 9, name="whole_domain")             # noqa whole domain surface
 
     gmsh.model.geo.synchronize()
-    gmsh.model.mesh.generate(2)
+    gmsh.model.mesh.generate(2) if not extrude else gmsh.model.mesh.generate(3)
     save_path = os.path.join(
         save_dir, f"{string}.msh"
     )

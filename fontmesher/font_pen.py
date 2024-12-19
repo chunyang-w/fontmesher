@@ -38,7 +38,7 @@ class FontPen(BasePen):
         _endPath():
             End the current path.
     """
-    def __init__(self, geo, min_val=-1, max_val=1, glyph_size=1, lc=0.02):
+    def __init__(self, geo, min_val=-1, max_val=1, glyph_size=1, lc=0.02, z=0):
         self.start_point = None
         self.path_start_idx = 0
         self.points = []
@@ -50,6 +50,7 @@ class FontPen(BasePen):
         self.max_val = max_val
         self.glyph_size = glyph_size
         self.lc = lc
+        self.z = z
 
         self.geo = geo
 
@@ -76,7 +77,7 @@ class FontPen(BasePen):
 
     def _moveTo(self, pt):
         pt = self._normalize_point(pt)
-        p = self.geo.addPoint(pt[0], pt[1], 0, self.lc)
+        p = self.geo.addPoint(pt[0], pt[1], self.z, self.lc)
         self.p_start = p
         self.points.append(p)
         self.start_point = pt
@@ -87,7 +88,7 @@ class FontPen(BasePen):
         if self._is_same_point(pt, self.start_point):
             p = self.p_start
         else:
-            p = self.geo.addPoint(pt[0], pt[1], 0, self.lc)
+            p = self.geo.addPoint(pt[0], pt[1], self.z, self.lc)
         self.points.append(p)
         curve = self.geo.addLine(prev_p, p)
         self.curves.append(curve)
@@ -99,7 +100,7 @@ class FontPen(BasePen):
             if self._is_same_point(pt, self.start_point):
                 p = self.p_start
             else:
-                p = self.geo.addPoint(pt[0], pt[1], 0, self.lc)
+                p = self.geo.addPoint(pt[0], pt[1], self.z, self.lc)
             curve_points.append(p)
         self.points.append(curve_points[-1])
         curve = self.geo.addBezier(curve_points)
