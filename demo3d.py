@@ -16,7 +16,7 @@ if __name__ == "__main__":
         string=string,
         font=default_font,
         save_dir=os.getcwd(),
-        lc=0.1,
+        lc=0.05,
         glyph_size=0.5,
         pad_y_start=0.25,
         pad_y_end=0.25,
