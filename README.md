@@ -59,6 +59,11 @@ make_string_mesh(
 )
 ```
 
+## Extra - 3D meshing
+![image](https://github.com/chunyang-w/fontmesher/blob/main/asset/logo_3d.jpg?raw=true)
+
+See [here](https://github.com/chunyang-w/fontmesher/blob/main/demo3d.py) for more detail.
+
 ## Contributing 🤝
 
 We welcome contributions! Feel free to open issues or submit pull requests.
