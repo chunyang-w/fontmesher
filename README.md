@@ -20,7 +20,7 @@ Github install
 git clone https://github.com/yourusername/fontmesher.git
 cd fontmesher
 
-pip install -r [requirements.txt](http://_vscodecontentref_/1)
+pip install -r requirements.txt
 pip install -e .
 ```
 or via pip:
