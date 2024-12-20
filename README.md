@@ -2,13 +2,13 @@
 
 ![image](https://github.com/chunyang-w/fontmesher/blob/main/asset/logo.png?raw=true)
 
-Welcome to **FontMesher**! This project lets you create beautiful meshes from your favorite fonts (Currently supported fonts are listed in `style` folder, other ttf font might work, but not guaranteed - issues and contribution welcome!).
+Welcome to **FontMesher**! This project lets you create beautiful meshes from your favorite fonts (Currently supported fonts are listed in the `style` folder, other ttf font might work, but not guaranteed - issues and contributions welcome!).
 
 This package will use GMSH to generate a 2-D mesh with characters written on it.
 
 ## Features ✨
 
-- **Mesh Generation**: Convert any string into a mesh using your favorite fonts.
+- **Mesh Generation**: Convert any string into a mesh using your favourite fonts.
 - **Customizable**: Adjust glyph sizes, padding, and offsets to get the perfect mesh.
 - **Easy to Use**: Simple API to generate and save meshes with minimal code.
 
@@ -17,14 +17,17 @@ This package will use GMSH to generate a 2-D mesh with characters written on it.
 Github install
 
 ```sh
-git clone https://github.com/yourusername/fontmesher.git
+git clone git@github.com:chunyang-w/fontmesher.git
 cd fontmesher
 
 pip install -r requirements.txt
 pip install -e .
 ```
+
 or via pip:
-pip install 
+```
+pip install git+ssh://git@github.com/chunyang-w/fontmesher.git
+```
 
 
 ## Usage 🚀
@@ -32,10 +35,10 @@ pip install
 Generate a mesh for a string by running the demo.py script:
 
 ```sh
-python demo.py "Hello, World!"
+python demo.py "Hello World"
 ```
 
-This will create a mesh file in the current directory.
+This will create a mesh file "Hello World.msh" in the current directory.
 
 ## Example 🖼️
 
@@ -62,7 +65,7 @@ make_string_mesh(
 ## Extra - 3D meshing
 ![image](https://github.com/chunyang-w/fontmesher/blob/main/asset/logo_3d.jpg?raw=true)
 
-See [here](https://github.com/chunyang-w/fontmesher/blob/main/demo3d.py) for more detail.
+See [here](https://github.com/chunyang-w/fontmesher/blob/main/demo3d.py) for more details.
 
 ## Contributing 🤝
 
